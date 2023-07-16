@@ -32,7 +32,9 @@
         let wordBank = [
             ['sich ärgert', 'über', 'anger yourself'],
             ['haben Angst', 'vor etw.', 'be afraid of something'],
-            ['arbeiten', 'bei', 'work for a company']
+            ['arbeiten', 'bei', 'work for a company'],
+            ['denken', 'an', 'think of something or someone'],
+            ['denken', 'über', 'thinking something over']
         ]
         let cardNum = Math.floor(Math.random() * (wordBank.length ))
         this.germanText = wordBank[cardNum][0]
