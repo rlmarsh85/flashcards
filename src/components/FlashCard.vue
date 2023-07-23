@@ -15,31 +15,39 @@
 </template>
   
 <script>
+  import axios from 'axios'
   export default {
     props: {
     }, 
+    beforeMount() {
+      console.log("Calling beforeMount")
+      this.fetchCards()
+    },    
     data() {
       return {
         germanText: '',
         preposition: '',
         englishText: '',
         showPreposition: false,
-        showEnglishText: false
+        showEnglishText: false,
+        wordBank: []
       }
     },
     methods: {
+      async fetchCards(){
+
+        this.response = await axios.get("http://localhost:3000/words"); 
+        this.wordBank = this.response.data
+
+      },
       pullCard() {
-        let wordBank = [
-            ['sich ärgert', 'über', 'anger yourself'],
-            ['haben Angst', 'vor etw.', 'be afraid of something'],
-            ['arbeiten', 'bei', 'work for a company'],
-            ['denken', 'an', 'think of something or someone'],
-            ['denken', 'über', 'thinking something over']
-        ]
-        let cardNum = Math.floor(Math.random() * (wordBank.length ))
-        this.germanText = wordBank[cardNum][0]
-        this.preposition = wordBank[cardNum][1]
-        this.englishText = wordBank[cardNum][2]
+
+        let cardNum = Math.floor(Math.random() * (this.wordBank.length ))
+       
+        this.germanText = this.wordBank[cardNum]['german']
+        this.preposition = this.wordBank[cardNum]['preposition']
+        this.englishText = this.wordBank[cardNum]['english']
+
 
         this.showEnglishText = false
         this.showPreposition = false
